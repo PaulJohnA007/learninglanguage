@@ -1,0 +1,865 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+    <script src="https://unpkg.com/unlazy@0.11.3/dist/unlazy.with-hashing.iife.js" defer init></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            /* Duolingo-inspired color palette */
+            --primary: #58CC02;
+            --primary-hover: #46A302;
+            --secondary: #1CB0F6;
+            --secondary-hover: #0095D8;
+            --accent: #FF4B4B;
+            --accent-hover: #EA2B2B;
+            --background: #FFF9F0;
+            --foreground: #4B4B4B;
+            --card-bg: #FFFFFF;
+            --yellow: #FFD900;
+            --purple: #CE82FF;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background);
+            color: var(--foreground);
+        }
+
+        .hero-section {
+            background-image: url('pics/school.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(rgba(88, 204, 2, 0.85), rgba(88, 204, 2, 0.7));
+            border-radius: 0 0 30px 30px;
+        }
+
+        .content-section {
+            background: linear-gradient(180deg, var(--background) 0%, #FFE0B2 100%);
+            border-radius: 40px 40px 0 0;
+            margin-top: -40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .video-card {
+            background-color: var(--card-bg);
+            border-radius: 24px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            border: 4px solid var(--yellow);
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .story-card {
+            transition: all 0.3s ease;
+            border: 4px solid white;
+        }
+
+        .story-card:hover {
+            transform: scale(1.05);
+        }
+
+        .feature-card {
+            background-color: var(--card-bg);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+            transition: all 0.2s ease;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--secondary-hover);
+            transform: translateY(-3px);
+        }
+
+        .btn-accent {
+            background-color: var(--accent);
+            color: white;
+            transition: all 0.2s ease;
+        }
+
+        .btn-accent:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-3px);
+        }
+
+        .bounce-animation {
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .floating-character {
+            position: absolute;
+            bottom: -30px;
+            right: 5%;
+            z-index: 20;
+            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+        }
+
+        .modal-content {
+            border-radius: 24px;
+            border-width: 6px;
+        }
+
+        .slide-controls button {
+            transition: all 0.2s ease;
+        }
+
+        .slide-controls button:hover {
+            transform: scale(1.05);
+        }
+
+        footer {
+            background-color: var(--primary);
+            border-radius: 30px 30px 0 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="min-h-screen flex flex-col">
+        <!-- Hero Section with School Background -->
+        <section class="hero-section w-full">
+            <div class="hero-overlay w-full py-12 px-4 md:py-20">
+                <div class="max-w-6xl mx-auto flex flex-col items-center text-center">
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 tracking-wide leading-tight">
+                        English Learning
+                    </h1>
+                    <p class="text-white text-xl md:text-2xl mb-10 max-w-2xl">
+                        Fun English pronunciation adventures for elementary students!
+                    </p>
+                    <button onclick="redirect('loginsignup_page.php')"
+                        class="btn-primary py-4 px-10 rounded-2xl font-bold text-xl shadow-lg flex items-center space-x-3 bounce-animation">
+                        <span>Start Your Adventure!</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                        </svg>
+                    </button>
+
+                    <!-- Floating character mascot -->
+                    <img src="https://cdn-icons-png.flaticon.com/512/2995/2995440.png" alt="Learning Mascot"
+                        class="floating-character w-32 h-32 md:w-40 md:h-40 bounce-animation">
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Section -->
+        <section class="content-section w-full py-16 px-4">
+            <!-- Learning Videos Section -->
+            <div id="videos" class="max-w-6xl mx-auto mb-20">
+                <h2 class="text-4xl font-extrabold text-center mb-12 text-[#58CC02]">Fun Learning Videos</h2>
+
+                <div class="flex flex-col gap-10">
+                    <!-- Video Card 1 -->
+                    <div class="video-card p-6">
+                        <div class="flex flex-col md:flex-row gap-6 mb-4">
+                            <div class="w-full md:w-1/2">
+                                <iframe src="https://www.youtube.com/embed/videoid1"
+                                    title="Practice Reading 3-letter Words"
+                                    class="w-full h-64 rounded-xl border-3 border-[#1CB0F6]"></iframe>
+                            </div>
+                            <div class="w-full md:w-1/2">
+                                <h3 class="text-2xl font-bold text-[#58CC02] mb-4">Practice Reading 3-letter Words</h3>
+                                <ul class="space-y-2 pl-5 list-disc text-[#4B4B4B]">
+                                    <li>Sound out each letter in fun three-letter words!</li>
+                                    <li>Build confidence with simple word games</li>
+                                    <li>Learn lots of new words to use every day</li>
+                                    <li>Get ready to read bigger words soon!</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="text-[#4B4B4B]">Join our colorful adventure learning 3-letter words! We'll use fun
+                            pictures, silly sounds, and exciting games to help you read words like "cat," "dog," and
+                            "sun." Perfect for beginning readers!</p>
+                    </div>
+
+                    <!-- Video Card 2 -->
+                    <div class="video-card p-6">
+                        <div class="flex flex-col md:flex-row gap-6 mb-4">
+                            <div class="w-full md:w-1/2">
+                                <iframe src="https://www.youtube.com/embed/videoid2" title="CVC Reading Lesson 1"
+                                    class="w-full h-64 rounded-xl border-3 border-[#1CB0F6]"></iframe>
+                            </div>
+                            <div class="w-full md:w-1/2">
+                                <h3 class="text-2xl font-bold text-[#58CC02] mb-4">CVC Reading Lesson 1</h3>
+                                <ul class="space-y-2 pl-5 list-disc text-[#4B4B4B]">
+                                    <li>Learn to read special CVC words with fun sounds!</li>
+                                    <li>Practice vowels and consonants with colorful characters</li>
+                                    <li>Blend sounds together like a reading superhero</li>
+                                    <li>Play games that make reading exciting</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="text-[#4B4B4B]">Welcome to our magical CVC world! In this video, we'll learn about
+                            consonant-vowel-consonant words with dancing letters, singing animals, and rainbow colors.
+                            Join us for a reading adventure!</p>
+                    </div>
+
+                    <!-- Video Card 3 -->
+                    <div class="video-card p-6">
+                        <div class="flex flex-col md:flex-row gap-6 mb-4">
+                            <div class="w-full md:w-1/2">
+                                <iframe src="https://www.youtube.com/embed/videoid3" title="The Smartest RickRoll"
+                                    class="w-full h-64 rounded-xl border-3 border-[#1CB0F6]"></iframe>
+                            </div>
+                            <div class="w-full md:w-1/2">
+                                <h3 class="text-2xl font-bold text-[#58CC02] mb-4">The Smartest RickRoll</h3>
+                                <ul class="space-y-2 pl-5 list-disc text-[#4B4B4B]">
+                                    <li>Discover a funny internet joke that everyone loves</li>
+                                    <li>Learn how creative surprises make people smile</li>
+                                    <li>See how music can be part of a friendly prank</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <p class="text-[#4B4B4B]">Get ready for a super silly surprise! This video has a special trick
+                            that will make you laugh and want to dance. Can you figure out the surprise before it
+                            happens?</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Magical Stories Section -->
+            <div id="stories" class="max-w-6xl mx-auto mb-20">
+                <h2 class="text-4xl font-extrabold text-center mb-12 text-[#58CC02]">Magical Stories</h2>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Story Card 1 -->
+                    <div class="story-card bg-gradient-to-br from-[#FF4B4B] to-[#FF9F9F] p-6 rounded-2xl shadow-lg cursor-pointer"
+                        onclick="openModal('story1')">
+                        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbXpibTFlMXF1ejRveWMxbmMyYncwdjgza3pheHkzcGR2N2t3dDh4dSZlcD12MV9naWZzX3RyZW5kaW5nJmN0PWc/lZZwR5gvWDYdFcGNf7/giphy.gif"
+                            alt="Story 1 Icon" class="mx-auto w-40 h-40 rounded-xl mb-4">
+                        <p class="text-xl font-bold text-white text-center py-3 bg-[#FF4B4B] rounded-xl">Adventure Time!
+                        </p>
+                    </div>
+
+                    <!-- Story Card 2 -->
+                    <div class="story-card bg-gradient-to-br from-[#FFD900] to-[#FFF5B8] p-6 rounded-2xl shadow-lg cursor-pointer"
+                        onclick="openModal('story2')">
+                        <img src="https://media.giphy.com/media/cncKRj0ka2MbABD5V5/giphy.gif?cid=790b7611aala8tgjpq44ga3ow6ohurebhp59lf73hirskeo9&ep=v1_gifs_search&rid=giphy.gif&ct=g"
+                            alt="Story 2 Icon" class="mx-auto w-40 h-40 rounded-xl mb-4">
+                        <p class="text-xl font-bold text-white text-center py-3 bg-[#FF9F00] rounded-xl">Magic Friends
+                        </p>
+                    </div>
+
+                    <!-- Story Card 3 -->
+                    <div class="story-card bg-gradient-to-br from-[#1CB0F6] to-[#A5E8FF] p-6 rounded-2xl shadow-lg cursor-pointer"
+                        onclick="openModal('story3')">
+                        <img src="https://media.giphy.com/media/KDlBVSWAsULMb61LuP/giphy.gif?cid=ecf05e47pkb83kkrcgwsg9dzt6qhr60tq2tujmx2bzil8u7t&ep=v1_gifs_search&rid=giphy.gif&ct=g"
+                            alt="Story 3 Icon" class="mx-auto w-40 h-40 rounded-xl mb-4">
+                        <p class="text-xl font-bold text-white text-center py-3 bg-[#1CB0F6] rounded-xl">Ocean Wonders
+                        </p>
+                    </div>
+
+                    <!-- Story Card 4 -->
+                    <div class="story-card bg-gradient-to-br from-[#CE82FF] to-[#EBC6FF] p-6 rounded-2xl shadow-lg cursor-pointer"
+                        onclick="openModal('story4')">
+                        <img src="https://media.giphy.com/media/EuI3MTQDO9vdPgFS79/giphy.gif?cid=ecf05e47z6rr8h166vhmihejyi4d11nxizlphtzrdrmk5qho&ep=v1_gifs_search&rid=giphy.gif&ct=g"
+                            alt="Story 4 Icon" class="mx-auto w-40 h-40 rounded-xl mb-4">
+                        <p class="text-xl font-bold text-white text-center py-3 bg-[#CE82FF] rounded-xl">Space Journey
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Learn With Us Section -->
+            <div class="max-w-6xl mx-auto mb-20">
+                <h2 class="text-4xl font-extrabold text-center mb-12 text-[#58CC02]">Why Learn With Us?</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Feature Card 1 -->
+                    <div class="feature-card p-8 shadow-lg border-t-8 border-[#FF4B4B]">
+                        <div class="w-20 h-20 bg-[#FF4B4B] rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#FF4B4B] mb-4 text-center">Fun Pronunciation</h3>
+                        <p class="text-[#4B4B4B] text-center">Learn how to say words correctly through games, songs, and
+                            colorful activities!</p>
+                    </div>
+
+                    <!-- Feature Card 2 -->
+                    <div class="feature-card p-8 shadow-lg border-t-8 border-[#58CC02]">
+                        <div class="w-20 h-20 bg-[#58CC02] rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#58CC02] mb-4 text-center">Magical Stories</h3>
+                        <p class="text-[#4B4B4B] text-center">Read along with exciting stories that help you practice
+                            new words and sounds!</p>
+                    </div>
+
+                    <!-- Feature Card 3 -->
+                    <div class="feature-card p-8 shadow-lg border-t-8 border-[#1CB0F6]">
+                        <div class="w-20 h-20 bg-[#1CB0F6] rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#1CB0F6] mb-4 text-center">Learn By Playing</h3>
+                        <p class="text-[#4B4B4B] text-center">Our fun activities make learning feel like playtime - you
+                            won't even know you're studying!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="w-full py-8 px-4 mt-auto">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                    <div class="mb-6 md:mb-0">
+                        <h3 class="text-2xl font-bold text-white mb-2">Speak & Learn</h3>
+                        <p class="text-white/80">Making pronunciation fun for kids!</p>
+                    </div>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-white hover:text-white/80 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-white hover:text-white/80 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="text-white hover:text-white/80 transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-8">
+                    <a href="#" class="text-white hover:underline font-medium">Privacy Policy</a>
+                    <a href="#" class="text-white hover:underline font-medium">Terms of Service</a>
+                    <a href="#" class="text-white hover:underline font-medium">Contact Us</a>
+                    <a href="#" class="text-white hover:underline font-medium">Help Center</a>
+                </div>
+                <div class="mt-8 text-white/80 text-sm text-center">
+                    © 2023 Speak & Learn. All rights reserved. Made with ❤️ for elementary students.
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Story Modals -->
+    <div id="story1" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-90 hidden z-50">
+        <div class="modal-content bg-white p-8 w-11/12 md:w-3/4 lg:w-1/2 max-h-90vh overflow-auto border-[#FF4B4B]">
+            <h3 class="text-3xl font-bold mb-6 text-center text-[#FF4B4B]">Adventure Time!</h3>
+            <div class="relative">
+                <div class="slide">
+                    <img src="./picstory/2.png" alt="Slide 1" class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory/3.png" alt="Slide 2" class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory/4.png" alt="Slide 3" class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory/5.png" alt="Slide 4" class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory/6.png" alt="Slide 5" class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory/7.png" alt="Slide 6" class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory/8.png" alt="Slide 7" class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory/9.png" alt="Slide 8" class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory/10.png" alt="Slide 9" class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory/11.png" alt="Slide 10" class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory/12.png" alt="Slide 11" class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+            </div>
+            <div class="slide-controls flex justify-between mt-6">
+                <button class="btn-secondary py-3 px-6 rounded-xl font-bold text-lg flex items-center"
+                    onclick="prevSlide('story1')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Previous
+                </button>
+                <button class="btn-primary py-3 px-6 rounded-xl font-bold text-lg flex items-center"
+                    onclick="nextSlide('story1')">
+                    Next
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+            <button class="btn-accent py-3 px-6 rounded-xl font-bold text-lg mt-4 w-full"
+                onclick="closeModal('story1')">Close Story</button>
+        </div>
+    </div>
+
+    <div id="story2" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-90 hidden z-50">
+        <div class="modal-content bg-white p-8 w-11/12 md:w-3/4 lg:w-1/2 max-h-90vh overflow-auto border-[#FFD900]">
+            <h3 class="text-3xl font-bold mb-6 text-center text-[#FF9F00]">Magic Friends</h3>
+            <div class="relative">
+                <div class="slide">
+                    <img src="./picstory2/storypicture1/1s.png" alt="Slide 1"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory2/storypicture1/2s.png" alt="Slide 2"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory2/storypicture1/3s.png" alt="Slide 3"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory2/storypicture1/4s.png" alt="Slide 4"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory2/storypicture1/5s.png" alt="Slide 5"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory2/storypicture1/6s.png" alt="Slide 6"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory2/storypicture1/7s.png" alt="Slide 7"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory2/storypicture1/8s.png" alt="Slide 8"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory2/storypicture1/9s.png" alt="Slide 9"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory2/storypicture1/10s.png" alt="Slide 10"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory2/storypicture1/11s.png" alt="Slide 11"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory2/storypicture1/12s.png" alt="Slide 12"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory2/storypicture1/13s.png" alt="Slide 13"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory2/storypicture1/14s.png" alt="Slide 14"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+            </div>
+            <div class="slide-controls flex justify-between mt-6">
+                <button class="btn-secondary py-3 px-6 rounded-xl font-bold text-lg flex items-center"
+                    onclick="prevSlide('story2')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Previous
+                </button>
+                <button class="btn-primary py-3 px-6 rounded-xl font-bold text-lg flex items-center"
+                    onclick="nextSlide('story2')">
+                    Next
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+            <button class="btn-accent py-3 px-6 rounded-xl font-bold text-lg mt-4 w-full"
+                onclick="closeModal('story2')">Close Story</button>
+        </div>
+    </div>
+
+    <div id="story3" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-90 hidden z-50">
+        <div class="modal-content bg-white p-8 w-11/12 md:w-3/4 lg:w-1/2 max-h-90vh overflow-auto border-[#1CB0F6]">
+            <h3 class="text-3xl font-bold mb-6 text-center text-[#1CB0F6]">Ocean Wonders</h3>
+            <div class="relative">
+                <div class="slide">
+                    <img src="./picstory3/storypicture2/1c.png" alt="Slide 1"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/2c.png" alt="Slide 2"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/3c.png" alt="Slide 3"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/4c.png" alt="Slide 4"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/5c.png" alt="Slide 5"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/6c.png" alt="Slide 6"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/7c.png" alt="Slide 7"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/8c.png" alt="Slide 8"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/9c.png" alt="Slide 9"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/10c.png" alt="Slide 10"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/11c.png" alt="Slide 11"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/12c.png" alt="Slide 12"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/13c.png" alt="Slide 13"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/14c.png" alt="Slide 14"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/15c.png" alt="Slide 15"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/16c.png" alt="Slide 16"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/17c.png" alt="Slide 17"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/18c.png" alt="Slide 18"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/19c.png" alt="Slide 19"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory3/storypicture2/20c.png" alt="Slide 20"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+            </div>
+            <div class="slide-controls flex justify-between mt-6">
+                <button class="btn-secondary py-3 px-6 rounded-xl font-bold text-lg flex items-center"
+                    onclick="prevSlide('story3')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Previous
+                </button>
+                <button class="btn-primary py-3 px-6 rounded-xl font-bold text-lg flex items-center"
+                    onclick="nextSlide('story3')">
+                    Next
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+            <button class="btn-accent py-3 px-6 rounded-xl font-bold text-lg mt-4 w-full"
+                onclick="closeModal('story3')">Close Story</button>
+        </div>
+    </div>
+
+    <div id="story4" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-90 hidden z-50">
+        <div class="modal-content bg-white p-8 w-11/12 md:w-3/4 lg:w-1/2 max-h-90vh overflow-auto border-[#CE82FF]">
+            <h3 class="text-3xl font-bold mb-6 text-center text-[#CE82FF]">Space Journey</h3>
+            <div class="relative">
+                <div class="slide">
+                    <img src="./picstory4/storypicture3/1v.png" alt="Slide 1"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory4/storypicture3/2v.png" alt="Slide 2"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory4/storypicture3/3v.png" alt="Slide 3"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory4/storypicture3/4v.png" alt="Slide 4"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory4/storypicture3/5v.png" alt="Slide 5"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory4/storypicture3/6v.png" alt="Slide 6"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory4/storypicture3/7v.png" alt="Slide 7"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory4/storypicture3/8v.png" alt="Slide 8"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory4/storypicture3/9v.png" alt="Slide 9"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory4/storypicture3/10v.png" alt="Slide 10"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+                <div class="slide hidden">
+                    <img src="./picstory4/storypicture3/11v.png" alt="Slide 11"
+                        class="w-full h-auto rounded-2xl shadow-md">
+                </div>
+            </div>
+            <div class="slide-controls flex justify-between mt-6">
+                <button class="btn-secondary py-3 px-6 rounded-xl font-bold text-lg flex items-center"
+                    onclick="prevSlide('story4')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                    Previous
+                </button>
+                <button class="btn-primary py-3 px-6 rounded-xl font-bold text-lg flex items-center"
+                    onclick="nextSlide('story4')">
+                    Next
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+            </div>
+            <button class="btn-accent py-3 px-6 rounded-xl font-bold text-lg mt-4 w-full"
+                onclick="closeModal('story4')">Close Story</button>
+        </div>
+    </div>
+
+    <!-- Progress tracker that appears when scrolling -->
+    <div class="fixed bottom-4 left-4 z-40 hidden md:block">
+        <div class="bg-white p-3 rounded-full shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-[#58CC02]" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+        </div>
+    </div>
+
+    <script>
+        function redirect(page) {
+            window.location.href = page;
+        }
+
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+            // Prevent body scrolling when modal is open
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+            // Re-enable body scrolling
+            document.body.style.overflow = 'auto';
+        }
+
+        function nextSlide(modalId) {
+            const modal = document.getElementById(modalId);
+            const slides = modal.querySelectorAll('.slide');
+            let currentSlide = -1;
+
+            slides.forEach((slide, index) => {
+                if (!slide.classList.contains('hidden')) {
+                    currentSlide = index;
+                }
+            });
+
+            slides[currentSlide].classList.add('hidden');
+            const nextSlide = (currentSlide + 1) % slides.length;
+            slides[nextSlide].classList.remove('hidden');
+
+            // Play a sound effect when changing slides
+            playSlideSound();
+        }
+
+        function prevSlide(modalId) {
+            const modal = document.getElementById(modalId);
+            const slides = modal.querySelectorAll('.slide');
+            let currentSlide = -1;
+
+            slides.forEach((slide, index) => {
+                if (!slide.classList.contains('hidden')) {
+                    currentSlide = index;
+                }
+            });
+
+            slides[currentSlide].classList.add('hidden');
+            const prevSlide = (currentSlide - 1 + slides.length) % slides.length;
+            slides[prevSlide].classList.remove('hidden');
+
+            // Play a sound effect when changing slides
+            playSlideSound();
+        }
+
+        function playSlideSound() {
+            // This would play a sound if implemented
+            // For now it's just a placeholder
+            console.log("Slide change sound would play here");
+        }
+
+        // Close modal when clicking outside of content
+        document.addEventListener('click', function (event) {
+            const modals = document.querySelectorAll('[id^="story"]');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    closeModal(modal.id);
+                }
+            });
+        });
+
+        // Add keyboard navigation for stories
+        document.addEventListener('keydown', function (event) {
+            const modals = document.querySelectorAll('[id^="story"]');
+            modals.forEach(modal => {
+                if (!modal.classList.contains('hidden')) {
+                    if (event.key === 'ArrowRight') {
+                        nextSlide(modal.id);
+                    } else if (event.key === 'ArrowLeft') {
+                        prevSlide(modal.id);
+                    } else if (event.key === 'Escape') {
+                        closeModal(modal.id);
+                    }
+                }
+            });
+        });
+
+        // Show/hide progress tracker based on scroll position
+        window.addEventListener('scroll', function () {
+            const progressTracker = document.querySelector('.fixed.bottom-4.left-4');
+            if (window.scrollY > 300) {
+                progressTracker.classList.remove('hidden');
+                progressTracker.classList.add('flex');
+            } else {
+                progressTracker.classList.add('hidden');
+                progressTracker.classList.remove('flex');
+            }
+        });
+
+        // Add animations on page load
+        window.addEventListener('load', function () {
+            // Animate the hero section elements
+            const heroElements = document.querySelectorAll('.hero-overlay > div > *');
+            heroElements.forEach((element, index) => {
+                setTimeout(() => {
+                    element.style.opacity = '0';
+                    element.style.transform = 'translateY(20px)';
+                    element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+
+                    setTimeout(() => {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }, 100);
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+
+</html>

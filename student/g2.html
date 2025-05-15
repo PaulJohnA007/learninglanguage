@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
+  <script src="https://unpkg.com/unlazy@0.11.3/dist/unlazy.with-hashing.iife.js" defer init></script>
+  <style>
+    /* For animation */
+    .menu-toggle {
+      transition: max-height 0.3s ease-in-out;
+    }  
+    .fixed-img {
+      width: 500px;
+      height: 250px;
+      object-fit: cover;
+    }  
+  </style>
+</head>
+<body>
+  <div class="min-h-screen flex flex-col md:flex-row relative">
+    <!-- Burger Menu Icon -->
+    <div class="md:hidden flex justify-between p-1 text-white bg-[#0038A8]">
+      <span class="text-2xl text-center font-bold">DASHBOARD</span>
+      <button id="burgerMenu" class="bg-[#0038A8] text-3xl focus:outline-none">
+        &#9776;
+      </button>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="menu-toggle w-full md:w-64 text-white flex flex-col bg-white md:static absolute max-h-0 md:max-h-full overflow-hidden z-40" id="sidebar">
+      <div class="p-4 text-center text-2xl font-bold text-[#0038A8] hidden md:block">DASHBOARD</div>
+        <nav class="flex-1 p-4 space-y-4">
+            <a href="dashboardselect.php" class="text-[#282828] block p-2 rounded bg-[#C5EBFE] hover:bg-[#0165FC] transition-ease menu-item focus:outline-none transition-all duration-300 transform hover:scale-105">Home</a>
+            <a href="profilepage.html" class="text-[#282828] block p-2 rounded bg-[#C5EBFE] hover:bg-[#0165FC] transition-ease menu-item focus:outline-none transition-all duration-300 transform hover:scale-105">Profile</a>
+            <a href="#" class="text-[#282828] block p-2 rounded bg-[#C5EBFE] hover:bg-[#0165FC] transition-ease menu-item focus:outline-none transition-all duration-300 transform hover:scale-105">Settings</a>
+      
+            <!-- Grade Selection Burger Menu -->
+            <div class="p-4 mt-auto">
+                <button id="gradeBurgerMenu" class="w-full h-10 bg-[#0038A8] text-3xl text-white flex justify-center items-center p-2 rounded focus:outline-none">
+                    &#9776;
+                </button>
+                
+                
+                <div id="gradeMenu" class="mt-1 hidden flex-col space-y-2">
+                  <a href="g1.html" class="text-[#282828] block p-2 rounded bg-[#C5EBFE] hover:bg-[#0165FC] transition-ease menu-item focus:outline-none transition-all duration-300 transform hover:scale-105">Grade 1</a>
+                  <a href="g2.html" class="text-[#282828] block p-2 rounded bg-[#C5EBFE] hover:bg-[#0165FC] transition-ease menu-item focus:outline-none transition-all duration-300 transform hover:scale-105">Grade 2</a>
+                  <a href="g3.html" class="text-[#282828] block p-2 rounded bg-[#C5EBFE] hover:bg-[#0165FC] transition-ease menu-item focus:outline-none transition-all duration-300 transform hover:scale-105">Grade 3</a>
+                  <a href="g4.html" class="text-[#282828] block p-2 rounded bg-[#C5EBFE] hover:bg-[#0165FC] transition-ease menu-item focus:outline-none transition-all duration-300 transform hover:scale-105">Grade 4</a>
+                  <a href="g5.html" class="text-[#282828] block p-2 rounded bg-[#C5EBFE] hover:bg-[#0165FC] transition-ease menu-item focus:outline-none transition-all duration-300 transform hover:scale-105">Grade 5</a>
+                  <a href="g6.html" class="text-[#282828] block p-2 rounded bg-[#C5EBFE] hover:bg-[#0165FC] transition-ease menu-item focus:outline-none transition-all duration-300 transform hover:scale-105">Grade 6</a>
+                </div>
+            </div>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="min-h-screen bg-gradient-to-r from-purple-400 to-blue-500 flex flex-col items-center justify-center p-4 space-y-6 flex-1 bg-cover bg-center" style="background-image: url('/pics/backg2.jpg');">
+      <div class="bg-yellow-500 rounded-3xl shadow-2xl p-2 w-full max-w-sm text-center transform transition-transform duration-500 hover:scale-105  animate-bounce">
+        <!-- <h2 class="text-lg font-semibold text-foreground">Good Morning,</h2>
+        <h1 class="text-2xl pb-4 font-bold text-blue-700">Adonis G!</h1> -->
+        <h1 class="text-2xl font-bold text-primary">WELCOME TO GRADE 2!</h1>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-3xl">
+        <div class="cursor-pointer bg-gradient-to-r from-green-200 to-green-400 rounded-2xl p-4 flex flex-col items-center transform transition-transform duration-500 hover:rotate-6 hover:scale-105">
+          <img class="rounded-2xl fixed-img" src="../pics/g2v.jpg" alt="math" class="mb-4">
+          <h3 class="text-lg font-semibold text-primary-foreground">Mathematics</h3>
+          <p class="text-sm text-muted-foreground">Reading some Words</p>
+        </div>
+        <div class="cursor-pointer bg-gradient-to-r from-orange-200 to-orange-400 rounded-2xl p-4 flex flex-col items-center transform transition-transform duration-500 hover:rotate-6 hover:scale-105">
+          <img class="rounded-2xl fixed-img" src="../pics/g2vv.jpg" alt="eng" class="mb-4">
+          <h3 class="text-lg font-semibold text-accent-foreground">English</h3>
+          <p class="text-sm text-muted-foreground">Reading some Words</p>
+        </div>
+         
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('burgerMenu').addEventListener('click', function() {
+      const sidebar = document.getElementById('sidebar');
+      if (sidebar.style.maxHeight) {
+        sidebar.style.maxHeight = null;
+      } else {
+        sidebar.style.maxHeight = sidebar.scrollHeight + 'px';
+      }
+    });
+
+    document.getElementById('gradeBurgerMenu').addEventListener('click', function() {
+      const gradeMenu = document.getElementById('gradeMenu');
+      if (gradeMenu.style.display === 'flex') {
+        gradeMenu.style.display = 'none';
+      } else {
+        gradeMenu.style.display = 'flex';
+      }
+    });
+
+    document.querySelectorAll('.menu-item').forEach(item => {
+      item.addEventListener('click', function() {
+        const sidebar = document.getElementById('sidebar');
+        sidebar.style.maxHeight = null;
+      });
+    });
+  </script>
+</body>
+</html>

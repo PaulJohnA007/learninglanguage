@@ -1,0 +1,382 @@
+
+.carousel-container {
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 2.5rem;
+  cursor: pointer;
+  z-index: 10;
+  transition: transform 0.3s ease;
+}
+
+.carousel-arrow:hover {
+  transform: translateY(-50%) scale(1.2);
+}
+
+.prev {
+  left: 20px;
+}
+
+.next {
+  right: 20px;
+}
+
+.carousel-card {
+  background: linear-gradient(135deg, #fff6e5, #ffe9e9);
+  border-radius: 25px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transform-origin: center;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.word-display {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.bounce-text {
+  font-size: 3.5rem;
+  color: #FF69B4;
+  text-shadow: 3px 3px 0 #FFE4E1;
+  animation: bounceWord 2s infinite;
+}
+
+.word-decorations {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.interaction-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.sound-btn,
+.speak-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 15px;
+  background: linear-gradient(145deg, #FFB6C1, #87CEEB);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.sound-btn:hover,
+.speak-btn:hover {
+  transform: scale(1.1);
+}
+
+.emoji-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.btn-text {
+  font-size: 1.2rem;
+  color: white;
+  font-weight: bold;
+}
+
+.progress-wrapper {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.progress-stars {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.progress-bar-animated {
+  height: 20px;
+  background: linear-gradient(90deg, #FF69B4, #87CEEB);
+  border-radius: 10px;
+  transition: width 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes bounceWord {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* For animation */
+.menu-toggle {
+  transition: max-height 0.3s ease-in-out;
+}
+
+.fixed-img {
+  width: 500px;
+  height: 250px;
+  object-fit: cover;
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 50;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #fff6e5, #ffe9e9);
+  border: 8px solid #FFB6C1;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 20px;
+  width: 1000px;
+  height: 750px;
+  max-height: 850px;
+  overflow-y: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  background: #FFB6C1;
+  padding: 15px;
+  border-radius: 15px;
+  margin: -20px -20px 20px -20px;
+  display: flex;
+  align-items: center;
+}
+
+.modal-title {
+  color: white;
+  font-size: 2rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+  flex: 1;
+  text-align: left;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100% - 60px);
+}
+
+.modal-content-center {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.modal-content-left {
+  text-align: left;
+  margin-top: 20px;
+  margin-left: 0;
+}
+
+.modal-content-bottom {
+  text-align: center;
+  margin-top: auto;
+}
+
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.mic-animation {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.mic-pulse {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: rgba(76, 175, 80, 0.3);
+  position: relative;
+  margin: 0 auto;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.mic-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 40px;
+  animation: bounce 1s infinite;
+}
+
+.mic-status {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #4CAF50;
+  font-weight: bold;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 30px rgba(76, 175, 80, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(76, 175, 80, 0);
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.modal-body {
+  animation-fill-mode: forwards;
+}
+
+.word-transition {
+  transition: all 0.5s ease-in-out;
+}
+
+#dynamicWord {
+  font-size: 48px;
+  color: #FF69B4;
+  text-shadow: 3px 3px 0 #FFE4E1;
+  animation: bounce 1s infinite;
+}
+
+.speakButton,
+#micButton {
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.speakButton:hover,
+#micButton:hover {
+  transform: scale(1.2);
+}
+
+.speakButtonCompleted{
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.speakButtonCompleted:hover {
+  transform: scale(1.2);
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes rainbow {
+  0% {
+    color: #FF69B4;
+  }
+
+  25% {
+    color: #87CEEB;
+  }
+
+  50% {
+    color: #98FB98;
+  }
+
+  75% {
+    color: #DDA0DD;
+  }
+
+  100% {
+    color: #FF69B4;
+  }
+}
+
+.progress-container {
+  width: 100%;
+  background: #FFE4E1;
+  border-radius: 20px;
+  padding: 5px;
+  margin-top: 20px;
+}
+
+.progress-bar {
+  height: 20px;
+  background: linear-gradient(90deg, #FF69B4, #87CEEB);
+  border-radius: 15px;
+  transition: width 0.5s ease;
+  position: relative;
+}
+
+.progress-bar::after {
+  content: '🚀';
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+}

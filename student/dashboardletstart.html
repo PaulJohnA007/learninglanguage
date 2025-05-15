@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio"></script>
+    <link rel="stylesheet" href="dashboardindex.css">
+    <style>
+      .hover-underline-animation {
+        display: inline-block;
+        position: relative;
+        color: #fff;
+      }
+      .hover-underline-animation:after {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(0);
+        height: 2px;
+        bottom: 0;
+        left: 0;
+        background-color: #0165FC;
+        transform-origin: bottom right;
+        transition: transform 0.25s ease-out;
+      }
+      .hover-underline-animation:hover:after {
+        transform: scaleX(1);
+        transform-origin: bottom left;
+      }
+    </style>
+  </head>
+
+  <body class="bg-gradient-to-r from-blue-100 via-blue-300 to-blue-500">
+    <div class="min-h-screen flex flex-col lg:flex-row">
+      <aside class="w-full lg:w-64 text-white flex flex-col bg-white shadow-lg">
+        <div class="p-4 text-center text-2xl font-bold text-[#0038A8]">DASHBOARD</div>
+        <nav class="flex-1 p-4 space-y-4">
+          <a href="dashboardletstart.html" class="block p-2 rounded bg-[#CE1126] hover:bg-[#0165FC] transition-ease hover-underline-animation">Home</a>
+          <a href="profilepage.html" class="block p-2 rounded bg-[#CE1126] hover:bg-[#0165FC] transition-ease hover-underline-animation">Profile</a>
+          <a href="#" class="block p-2 rounded bg-[#CE1126] hover:bg-[#0165FC] transition-ease hover-underline-animation">Settings</a>
+        </nav>
+      </aside>
+
+      <main class="min-h-screen flex flex-col items-center justify-center p-4 space-y-6 flex-1 bg-cover bg-center" style="background-image: url('/pics/cartoon-kids-garden.jpg');">
+        <div class="bg-black bg-opacity-50 rounded-lg p-8 flex flex-col items-center justify-center text-center space-y-4">
+          <h1 class="text-4xl lg:text-6xl font-bold text-white mb-8 hover-underline-animation">LEARN TO PRONOUNCE</h1>
+          <a href="dashboardselect.html">
+            <button class="bg-[#CE1126] text-white hover:bg-[#0165FC] px-6 py-3 rounded-lg text-lg font-semibold transition-transform transform hover:scale-105">LET'S START</button>
+          </a>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
